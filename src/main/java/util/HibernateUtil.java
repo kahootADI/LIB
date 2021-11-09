@@ -8,9 +8,6 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 
-import model.Kahoot;
-import model.Player;
-import model.Question;
 import model.User;
 
 public class HibernateUtil {
@@ -32,16 +29,13 @@ public class HibernateUtil {
                 settings.put(Environment.SHOW_SQL, "true");
 
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-
-                settings.put(Environment.HBM2DDL_AUTO, "none");
+                settings.put(Environment.HBM2DDL_AUTO, "create-drop");
+                
 
                 configuration.setProperties(settings);
 
                 //configuration.addAnnotatedClass(Table1.class);
                 configuration.addAnnotatedClass(User.class);
-                configuration.addAnnotatedClass(Player.class);
-                configuration.addAnnotatedClass(Question.class);
-                configuration.addAnnotatedClass(Kahoot.class);
 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties()).build();

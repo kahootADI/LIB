@@ -28,7 +28,6 @@ public class UserDao {
 		}
 	}
 	
-
 	public void updateUser(User user) {
 		Transaction transaction = null;
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -89,26 +88,4 @@ public class UserDao {
 		}
 		return users;
 	}
-	
-	public void deleteUser(long id) {
-		Transaction transaction = null;
-		User user = null;
-		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-			// start the trasaction
-			transaction = session.beginTransaction();
-			
-			user = session.get(User.class, id);
-			// save User object
-			session.remove(user);
-
-			// commit the transaction
-			transaction.commit();
-		} catch (Exception e) {
-			if (transaction != null) {
-				transaction.rollback();
-			}
-		}
-	}
-	
-
 }
