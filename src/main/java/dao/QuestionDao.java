@@ -25,7 +25,7 @@ public class QuestionDao {
 			}
 		}
 	}
-	
+
 	public static Question getQuestionById(long id) {
 		Transaction transaction = null;
 		Question question = null;
@@ -33,10 +33,9 @@ public class QuestionDao {
 			// start the trasaction
 			transaction = session.beginTransaction();
 
-			// get User object
-			//User = session.load(User.class, id);
+			// get Question object
 			question = session.get(Question.class, id);
-			
+
 			// commit the transaction
 			transaction.commit();
 		} catch (Exception e) {

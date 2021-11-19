@@ -3,19 +3,19 @@ package dao;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import model.Kahoot;
-
+import model.Answer;
+import model.Player;
 import util.HibernateUtil;
 
-public class KahootDao {
-	public void saveKahoot(Kahoot kahoot) {
+public class AnswerDao {
+	public void saveAnswer(Answer answer) {
 		Transaction transaction = null;
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			// start the trasaction
 			transaction = session.beginTransaction();
 
-			// save User object
-			session.save(kahoot);
+			// save Player object
+			session.save(answer);
 
 			// commit the transaction
 			transaction.commit();
@@ -26,15 +26,16 @@ public class KahootDao {
 		}
 	}
 	
-	public static Kahoot getKahootById(long id) {
+	
+	public static Answer getAnswerById(long id) {
 		Transaction transaction = null;
-		Kahoot kahoot = null;
+		Answer answer = null;
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			// start the trasaction
 			transaction = session.beginTransaction();
 
-			// get Kahoot object
-			kahoot = session.get(Kahoot.class, id);
+			// get Answer object
+			answer = session.get(Answer.class, id);
 			
 			// commit the transaction
 			transaction.commit();
@@ -43,6 +44,6 @@ public class KahootDao {
 				transaction.rollback();
 			}
 		}
-		return kahoot;
+		return answer;
 	}
 }

@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import model.Player;
+import model.User;
 import util.HibernateUtil;
 
 public class PlayerDao {
@@ -53,7 +54,6 @@ public class PlayerDao {
 			transaction = session.beginTransaction();
 
 			// get Player object
-			//Player = session.load(Player.class, id);
 			player = session.get(Player.class, id);
 			
 			// commit the transaction
@@ -107,4 +107,6 @@ public class PlayerDao {
 			}
 		}
 	}
+	
+	
 }

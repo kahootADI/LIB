@@ -1,9 +1,19 @@
 package model;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -11,17 +21,27 @@ import javax.persistence.Table;
 public class Player {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id")
+	@Column(name = "id")
 	private long id;
-	
-	@Column(name="nickname")
+
+	@Column(name = "nickname")
 	private String username;
-	
-	@Column(name="password")
+
+	@Column(name = "password")
 	private String password;
-	
-	@Column(name="token")
+
+	@Column(name = "token")
 	private String token;
+
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(name = "player_concourse", joinColumns = { @JoinColumn(name = "player_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "concourse_id") })
+	private List<Concourse> concourses = new ArrayList<Concourse>();
+
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(name = "player_answer", joinColumns = { @JoinColumn(name = "player_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "id") })
+	private List<Answer> answers = new ArrayList<Answer>();
 
 	public Player() {
 		super();
@@ -66,6 +86,21 @@ public class Player {
 	public void setToken(String token) {
 		this.token = token;
 	}
-	
-	
+
+	public List<Concourse> getConcourses() {
+		return concourses;
+	}
+
+	public void setConcourses(List<Concourse> concourses) {
+		this.concourses = concourses;
+	}
+
+	public List<Answer> getAnswers() {
+		return answers;
+	}
+
+	public void setAnswers(List<Answer> answers) {
+		this.answers = answers;
+	}
+
 }
