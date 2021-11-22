@@ -10,6 +10,7 @@ import org.hibernate.service.ServiceRegistry;
 
 import model.Answer;
 import model.Concourse;
+import model.Contest;
 import model.Kahoot;
 import model.Player;
 import model.Question;
@@ -34,7 +35,7 @@ public class HibernateUtil {
                 settings.put(Environment.SHOW_SQL, "true");
 
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-                settings.put(Environment.HBM2DDL_AUTO, "create");
+                settings.put(Environment.HBM2DDL_AUTO, "none");
                 
 
                 configuration.setProperties(settings);

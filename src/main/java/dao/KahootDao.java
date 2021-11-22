@@ -1,10 +1,13 @@
 package dao;
 
+import java.math.BigInteger;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import model.Kahoot;
-
+import model.User;
 import util.HibernateUtil;
 
 public class KahootDao {
@@ -44,5 +47,47 @@ public class KahootDao {
 			}
 		}
 		return kahoot;
+	}
+	
+	public static Kahoot getKahootByName(String name) {
+		Transaction transaction = null;
+		Kahoot kahoot = null;
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			// start the trasaction
+			transaction = session.beginTransaction();
+			String query = "FROM Kahoot where title= '"+name+"'";
+			kahoot = (Kahoot) session.createQuery(query).uniqueResult();
+			System.out.println("Kahoots 3: " + kahoot);
+			// commit the transaction
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				System.out.println("Error: " + e);
+				transaction.rollback();
+			}
+		}
+		return kahoot;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<Kahoot> getAllKahootByUser(long userId) {
+		Transaction transaction = null;
+		List<Kahoot> kahoots = null;
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			// start the trasaction
+			transaction = session.beginTransaction();
+			System.out.println("Kahoots: " + kahoots);
+			String query = "FROM Kahoot where FK_ID_user="+userId;
+			kahoots = session.createQuery(query).list();
+			System.out.println("Kahoots 2: " + kahoots);
+			// commit the transaction
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				System.out.println(e);
+				transaction.rollback();
+			}
+		}
+		return kahoots;
 	}
 }

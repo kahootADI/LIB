@@ -42,11 +42,16 @@ public class Answer {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Answer(String answer, Question question) {
+	
+
+	public Answer(String answer, boolean correct, Question question) {
 		super();
 		this.answer = answer;
+		this.correct = correct;
 		this.question = question;
 	}
+
+
 
 	public long getId() {
 		return id;

@@ -1,10 +1,13 @@
 package dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import model.Answer;
 import model.Player;
+import model.Question;
 import util.HibernateUtil;
 
 public class AnswerDao {
@@ -26,6 +29,27 @@ public class AnswerDao {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
+	public static List<Answer> getAllQuestionByKahoot(long questionId) {
+		Transaction transaction = null;
+		List<Answer> answers = null;
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			// start the trasaction
+			transaction = session.beginTransaction();
+			System.out.println("Kahoots: " + answers);
+			String query = "FROM Answer where FK_ID_question="+questionId;
+			answers = session.createQuery(query).list();
+			System.out.println("Kahoots 4: " + answers);
+			// commit the transaction
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				System.out.println(e);
+				transaction.rollback();
+			}
+		}
+		return answers;
+	}
 	
 	public static Answer getAnswerById(long id) {
 		Transaction transaction = null;

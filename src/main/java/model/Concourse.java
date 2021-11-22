@@ -42,6 +42,12 @@ public class Concourse {
 		super();
 		this.kahoot = kahoot;
 	}
+	
+	public Concourse(Kahoot kahoot, List<Player> players) {
+		super();
+		this.kahoot = kahoot;
+		this.players = players;
+	}
 
 	public long getId() {
 		return id;
