@@ -34,6 +34,11 @@ public class Question {
 		this.question = question;
 		this.kahoot = kahoot;
 	}
+	
+	public Question(String question) {
+		super();
+		this.question = question;
+	}
 
 	public long getId() {
 		return id;
