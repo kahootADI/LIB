@@ -90,10 +90,13 @@ public class App {
 		answerDao.saveAnswer(answer10);
 		
 		ConcourseDao concourseDao = new ConcourseDao();
+		Concourse concourse = new Concourse(kahoot1);
+		concourseDao.saveConcourse(concourse);
 		
-		Concourse concourse = new Concourse(kahoot1, players);
-		
-		concourseDao.saveContest(concourse);
-		
+		//table player_concourse
+		for (Player p: players) {
+			p.getConcourses().add(concourse);
+			playerDao.updatePlayer(p);
+		}
 	}
 }

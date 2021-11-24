@@ -22,8 +22,8 @@ import javax.persistence.Table;
 @Table(name = "concourse")
 public class Concourse {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "concourse_id")
 	private long id;
 
 	@ManyToOne()
@@ -41,12 +41,6 @@ public class Concourse {
 	public Concourse(Kahoot kahoot) {
 		super();
 		this.kahoot = kahoot;
-	}
-	
-	public Concourse(Kahoot kahoot, List<Player> players) {
-		super();
-		this.kahoot = kahoot;
-		this.players = players;
 	}
 
 	public long getId() {

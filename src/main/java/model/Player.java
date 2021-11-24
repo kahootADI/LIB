@@ -20,8 +20,8 @@ import javax.persistence.Table;
 @Table(name = "player")
 public class Player {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "player_id")
 	private long id;
 
 	@Column(name = "nickname")
@@ -33,7 +33,7 @@ public class Player {
 	@Column(name = "token")
 	private String token;
 
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "player_concourse", joinColumns = { @JoinColumn(name = "player_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "concourse_id") })
 	private List<Concourse> concourses = new ArrayList<Concourse>();
