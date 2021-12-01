@@ -38,9 +38,9 @@ public class Player {
 			@JoinColumn(name = "concourse_id") })
 	private List<Concourse> concourses = new ArrayList<Concourse>();
 
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "player_answer", joinColumns = { @JoinColumn(name = "player_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "id") })
+			@JoinColumn(name = "answer_id") })
 	private List<Answer> answers = new ArrayList<Answer>();
 
 	public Player() {

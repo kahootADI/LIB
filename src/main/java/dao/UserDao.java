@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import model.Concourse;
 import model.User;
 import util.HibernateUtil;
 
@@ -100,6 +101,7 @@ public class UserDao {
 		}
 		return users;
 	}
+	
 	
 	public User getLastUser() {
 		Transaction transaction = null;

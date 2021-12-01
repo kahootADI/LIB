@@ -57,7 +57,6 @@ public class KahootDao {
 			transaction = session.beginTransaction();
 			String query = "FROM Kahoot where title= '"+name+"'";
 			kahoot = (Kahoot) session.createQuery(query).uniqueResult();
-			System.out.println("Kahoots 3: " + kahoot);
 			// commit the transaction
 			transaction.commit();
 		} catch (Exception e) {

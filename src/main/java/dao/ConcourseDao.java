@@ -1,5 +1,7 @@
 package dao;
 
+import java.math.BigInteger;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -55,6 +57,26 @@ public class ConcourseDao {
 
 			// get contest object
 			concourse = session.get(Concourse.class, id);
+			
+			// commit the transaction
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+		}
+		return concourse;
+	}
+	
+	public static Concourse getLastConcourse() {
+		Transaction transaction = null;
+		Concourse concourse = null;
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			// start the trasaction
+			transaction = session.beginTransaction();
+
+			Long lastId = ((BigInteger) session.createSQLQuery("SELECT MAX(Concourse_id)").uniqueResult()).longValue();
+
 			
 			// commit the transaction
 			transaction.commit();

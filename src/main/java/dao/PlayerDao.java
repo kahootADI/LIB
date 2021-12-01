@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import model.Player;
 import model.User;
@@ -78,6 +79,25 @@ public class PlayerDao {
 			//Player = session.load(Player.class, id);
 			players = session.createQuery("from player").list();
 			
+			// commit the transaction
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+		}
+		return players;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Player> getAllPlayerByConcourse(long id) {
+		Transaction transaction = null;
+		List<Player> players = null;
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			// start the trasaction
+			transaction = session.beginTransaction(); 
+			Query query = session.createQuery("from Player_concourse pc where pc.concourse_id =" + id);
+			players = query.list();
 			// commit the transaction
 			transaction.commit();
 		} catch (Exception e) {
