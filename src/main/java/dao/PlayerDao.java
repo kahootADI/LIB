@@ -96,7 +96,7 @@ public class PlayerDao {
 		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 			// start the trasaction
 			transaction = session.beginTransaction(); 
-			Query query = session.createQuery("from Player_concourse pc where pc.concourse_id =" + id);
+			Query query = session.createQuery("from Player  where pc.concourse_id =" + id);
 			players = query.list();
 			// commit the transaction
 			transaction.commit();

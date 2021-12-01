@@ -20,7 +20,7 @@ public class App {
 	public static void main(String[] args) {
 		UserDao userDao = new UserDao();
 		
-		User user1 = new User("Leandro", "Zabala");
+		User user1 = new User("Leandro", "1234");
 		User user2 = new User("Enric", "Mieza");
 		User user3 = new User("Lluis", "Vila");
 		
